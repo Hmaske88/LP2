@@ -4,19 +4,16 @@ nodes=list(map(str,input("Enter the nodes in the graph separated by space :").sp
 print(nodes)
 # nodes=['A', 'B', 'C', 'D', 'E', 'G']
 
-edges=list(map(str,input("Enter the edges in the graph separated by space :").split(" ")))
-print(edges)
-# edges=['AB', 'AE', 'BC', 'ED', 'DG', 'BG']
-
+edgwt=[[x,y] for x,y in zip(map(str,input("Enter the edges separated by space : ").split(" ")), map(int,input("Enter their respective weights separated by space : ").split(" ")))]
 for i in nodes:
-    graph[i]={}
-    for j in edges:
-        if(j[0]==i):
-            print("Enter the weight of edge "+j+" : ")
-            w=int(input())
-            graph[i][j[1]]=w
+    g[i]={}
+    for j in edgwt:
+        if(j[0][0]==i):
+            g[i][j[0][1]]=j[1]
+        if(j[0][1]==i):
+            g[i][j[0][0]]=j[1]
 print(graph)
-# graph={'A': {'B': 2, 'E': 3}, 'B': {'C': 1, 'G': 9}, 'C': {}, 'D': {'G': 1}, 'E': {'D': 6}, 'G': {}}
+# graph={'A': {'B': 2, 'E': 3}, 'B': {'A': 2, 'C': 1, 'G': 9}, 'C': {'B': 1}, 'D': {'E': 6, 'G': 1}, 'E': {'A': 3, 'D': 6}, 'G': {'B': 9, 'D': 1}}
 
 h={}
 for i in nodes:
