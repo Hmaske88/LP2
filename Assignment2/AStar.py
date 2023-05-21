@@ -1,27 +1,28 @@
-Graph_nodes = {
-    'A': [('B', 2), ('E', 3)],
-    'B': [('C', 1),('G', 9)],
-    'C': None,
-    'E': [('D', 6)],
-    'D': [('G', 1)],
-}
+graph={}
 
-def heuristic(n):
-    H_dist = {
-        'A': 11,
-        'B': 6,
-        'C': 99,
-        'D': 1,
-        'E': 7,
-        'G': 0,
-    }
-    return H_dist[n]
-    
-def get_neighbors(v):
-    if v in Graph_nodes:
-        return Graph_nodes[v]
-    else:
-        return None
+nodes=list(map(str,input("Enter the nodes in the graph separated by space :").split(" ")))
+print(nodes)
+# nodes=['A', 'B', 'C', 'D', 'E', 'G']
+
+edges=list(map(str,input("Enter the edges in the graph separated by space :").split(" ")))
+print(edges)
+# edges=['AB', 'AE', 'BC', 'ED', 'DG', 'BG']
+
+for i in nodes:
+    graph[i]={}
+    for j in edges:
+        if(j[0]==i):
+            print("Enter the weight of edge "+j+" : ")
+            w=int(input())
+            graph[i][j[1]]=w
+print(graph)
+# graph={'A': {'B': 2, 'E': 3}, 'B': {'C': 1, 'G': 9}, 'C': {}, 'D': {'G': 1}, 'E': {'D': 6}, 'G': {}}
+
+h={}
+for i in nodes:
+    print("Enter heuristic value of "+ i +" : ")
+    h[i]=int(input())
+
         
 def aStarAlgo(start_node, stop_node):
     open_set=set(start_node)
@@ -37,13 +38,13 @@ def aStarAlgo(start_node, stop_node):
         n=None
         
         for v in open_set:
-            if (n==None or (g[v]+heuristic(v)<g[n]+heuristic(n))):
+            if (n==None or (g[v]+h[v] < g[n]+h[n])):
                 n=v
         
-        if(n==stop_node or Graph_nodes[n]==None):
+        if(n==stop_node or graph[n]==None):
             pass
         else:
-            for (m,weight) in get_neighbors(n):
+            for m,weight in graph[n].items():
                 if(m not in open_set and m not in close_set):
                     open_set.add(m)
                     parent[m]=n
@@ -71,7 +72,7 @@ def aStarAlgo(start_node, stop_node):
             
             path.reverse()
             
-            print("Path found : ",path)
+            print("\nPath found : ",path)
             return path
             
         open_set.remove(n)
