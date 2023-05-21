@@ -1,29 +1,30 @@
-# Jobs, Profit, Slot
-profit = [15,27,10,100, 150]
-jobs = ["j1", "j2", "j3", "j4", "j5"]
-deadline = [2,3,3,3,4] 
-profitNJobs = list(zip(profit,jobs,deadline))
-profitNJobs = sorted(profitNJobs, key = lambda x: x[0], reverse = True)
+List=[(job,deadline,profit) for job,deadline,profit in zip(map(str,input("Enter the jobs separated by space :").split(" ")),map(int,input("Enter the respective deadlines separated by space :").split(" ")),map(int,input("Enter the respective profits separated by space :").split(" ")))]
+print(List)
+# List=[('j1', 3, 4), ('j2', 1, 5), ('j3', 1, 3)]
 
-slot = []
-for i in range(len(jobs)):
+L=sorted(List,key= lambda x:x[2], reverse=True)
+
+slot=[]
+ans=[]
+
+for i in range(len(L)):
     slot.append(0)
-
-profit = 0
-ans = []
-
-for i in range(len(jobs)):
     ans.append('null')
+    
+profit=0
 
-for i in range(len(jobs)):
-        job = profitNJobs[i]
-        #check if slot is occupied
-        for j in range(job[2], 0, -1):
-            if slot[j] == 0:
-                ans[j] = job[1]
-                profit += job[0]
-                slot[j] = 1
-                break
-        
-print("Jobs scheduled :",ans[1:])
-print(profit)
+for i in range(len(L)):
+    job=L[i]
+    for j in range(job[1],0,-1):
+        j=j-1
+        if slot[j]==0:
+            slot[j]=1
+            ans[j]=job[0]
+            profit+=job[2]
+            break
+    
+print("Profit = ",profit)
+n=1
+for i in ans:
+    print("Slot",n," --> ",i)
+    n+=1
