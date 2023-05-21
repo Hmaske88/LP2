@@ -22,7 +22,7 @@ h={}
 for i in nodes:
     print("Enter heuristic value of "+ i +" : ")
     h[i]=int(input())
-
+# h={'A': 11, 'B': 6, 'C': 99, 'D': 1, 'E': 7, 'G': 0} 
         
 def aStarAlgo(start_node, stop_node):
     open_set=set(start_node)
