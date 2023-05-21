@@ -6,12 +6,12 @@ print(nodes)
 
 edgwt=[[x,y] for x,y in zip(map(str,input("Enter the edges separated by space : ").split(" ")), map(int,input("Enter their respective weights separated by space : ").split(" ")))]
 for i in nodes:
-    g[i]={}
+    graph[i]={}
     for j in edgwt:
         if(j[0][0]==i):
-            g[i][j[0][1]]=j[1]
+            graph[i][j[0][1]]=j[1]
         if(j[0][1]==i):
-            g[i][j[0][0]]=j[1]
+            graph[i][j[0][0]]=j[1]
 print(graph)
 # graph={'A': {'B': 2, 'E': 3}, 'B': {'A': 2, 'C': 1, 'G': 9}, 'C': {'B': 1}, 'D': {'E': 6, 'G': 1}, 'E': {'A': 3, 'D': 6}, 'G': {'B': 9, 'D': 1}}
 
